@@ -1,0 +1,86 @@
+.formulario-iniciar-juego{
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;*/
+    position: relative;
+    width: 100%;
+    font-size: 2.3rem;
+    color: var(--color-white);
+    /*overflow-x: hidden;
+    overflow-y: visible;*/
+}
+
+.formulario-iniciar-juego__elem{
+    width: 100%;
+    position: absolute;
+    /*top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);*/
+    left: 0;
+    transition: all .6s linear;
+    visibility: visible;
+}
+
+.oculto-izquierda{
+    left: -100%;
+    visibility: hidden;
+}
+
+.oculto-derecha{
+    left: 100%;
+    visibility: hidden;
+}
+
+.formulario-iniciar-juego form{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.linea-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.linea-form label{
+    padding: 5px;
+}
+
+.linea-form input[type="radio"]{
+    width: inherit;
+}
+
+.formulario-iniciar-juego input{
+    font-size: 1.8rem;
+    padding: .6rem 1rem;
+    text-align: center;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 2px;
+    opacity: .7;
+    border-color: var(--color-secondary);
+}
+
+.formulario-reiniciar-juego{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.invisible{
+    display: none;
+}
+
+.no-visible{
+    visibility: hidden;
+}
+
+@media all and ( min-width: 768px ){
+    .formulario-iniciar-juego button{
+        font-size: 2.3rem;
+    }
+}

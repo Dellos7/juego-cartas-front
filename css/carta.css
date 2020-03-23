@@ -1,0 +1,196 @@
+.zona-tablero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 1.5rem;
+}
+
+.zona-tablero h2{
+    text-align: center;
+}
+
+.tablero-cartas{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* width de .carta * 4 + margin de .carta * 8 */
+    max-width: calc(8rem*4 + .3rem*8);
+    -moz-perspective: 150rem;
+    -webkit-perspective: 150rem;
+    perspective: 150rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.carta{
+    position: relative; /* Para poder poner como "position: absolute" el hijo */
+    /*width: calc( 100% * (1/4) - 10px );
+    max-width: 16rem;*/
+    /* Mobile first */
+    margin: .3rem;
+    width: 8rem;
+    height: 11.12rem;
+    animation: repartir 2s forwards;
+    animation-timing-function: ease-in-out;
+}
+.carta:hover{
+    cursor: pointer;
+}
+
+.deshabilitada{
+    pointer-events: none;
+}
+
+.deshabilitada:hover{
+    cursor: not-allowed;
+}
+
+.carta__cara{
+    top: 0;
+    left: 0;
+    position: absolute; /* Para que reverso y foto estén en la misma posición (superpuestos) */
+    height: 100%;
+    width: 100%;
+    /*Que la parte trasera del elemento sea invisible, nos sirve para cuando rotamos*/
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: .3rem;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    /*box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .15);*/
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.carta__cara--reverso{
+    background-color: #9c27b0;
+    border: .5rem double white;
+}
+
+.carta__cara--foto{
+    background-color: red;
+    background-size: cover;
+}
+
+.reverso-rotado{
+    transform: rotateY(-180deg);
+}
+
+.reverso-sin-rotar{
+    transform: rotateY(0deg);
+}
+
+.foto-rotada{
+    transform: rotateY(180deg);
+}
+
+.foto-sin-rotar{
+    transform: rotateY(0deg);
+}
+
+.aciertos{
+    display: flex;
+    justify-content: center;
+}
+.acierto-card{
+    margin: 0 .3rem;
+    width: 6rem;
+    height: 8.34rem;
+    background-size: cover;
+    transition: all 2s linear;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.aciertos-jugador .acierto-card{
+    background-color: #009688;
+}
+
+.aciertos-rival .acierto-card{
+    background-color: var(--color-secondary);
+}
+
+.esperando-jugador{
+    font-size: 2.5rem;
+    color: var(--color-white);
+    text-align: center;
+    animation: parpadearTexto 1.5s infinite;
+}
+
+/*Escritorio*/
+@media all and ( min-width: 768px ){
+    .zona-tablero{
+        flex-direction: row;
+        justify-content: center;
+    }
+    .aciertos-jugador{
+        flex: 1;
+    }
+    .aciertos-rival{
+        flex: 1;
+    }
+    .tablero-cartas{
+        /*width: 80%;*/
+        flex: 8;
+        /* width de .carta * 4 + margin de .carta * 8 */
+        max-width: calc(13rem*4 + 1rem*8);
+    }
+    .carta{
+        margin: 1rem;
+        width: 13rem;
+        height: 18rem;
+    }
+    .aciertos{
+        flex-direction: column;
+        align-items: center;
+    }
+    .acierto-card{
+        margin: .5rem 0;
+        width: 7rem;
+        height: 9.73rem;
+    }
+}
+
+/*Tablet*/
+@media all and ( min-width: 600px ) and ( max-width: 768px ){
+    .zona-tablero{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .tablero-cartas{
+        width: 95%;
+        /* width de .carta * 4 + margin de .carta * 8 */
+        max-width: calc(9rem*4 + .7rem*8);
+    }
+    .carta{
+        margin: .7rem;
+        width: 9rem;
+        height: 12.51rem;
+    }
+    .acierto-card{
+        margin: 0 .5rem;
+        width: 7rem;
+        height: 9.73rem;
+    }
+}
+
+@keyframes repartir {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes parpadearTexto{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: .2;
+    }
+}

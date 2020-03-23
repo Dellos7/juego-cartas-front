@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title>Juego de cartas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico|Ubuntu|Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/carta.css">
+        <link rel="stylesheet" href="css/formulario.css">
+        <script type="text/javascript" src="js/global.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
+        <script type="text/javascript" src="js/vista.js"></script>
+        <script type="text/javascript" src="js/controlador.js"></script>
+        <script type="text/javascript" src="js/wsocket.js"></script>
+        <script type="text/javascript" src="js/juegoCartas.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 class="titulo titulo-border-top titulo-border-bottom margin-top">encuentra la pareja</h1>
+            <h1 class="titulo pareja-icono">👫</h1>
+        </header>
+        <main>
+        <div id="formulario-iniciar-juego" class="formulario-iniciar-juego">
+            <div class="form-solo-duo-wrapper formulario-iniciar-juego__elem">
+                <form method="post" class="form-boton-solo" onsubmit="return controlador.iniciarJuego('solo')">
+                    <button type="submit">Solo</button>
+                </form>
+                <form method="post" class="form-boton-duo" onsubmit="return vista.mostrarFormPartidaJugador()">
+                    <button type="submit">Duo</button>
+                </form>
+            </div>
+            <div class="form-partida-nombre-wrapper formulario-iniciar-juego__elem oculto-derecha">
+                <form method="post" class="form-partida-nombre" onsubmit="return controlador.iniciarJuego('duo')">
+                    <div class="linea-form">
+                        <label for="id-partida">Id de la partida</label>
+                        <input id="id-partida" name="id-partida" type="text" required>
+                    </div>
+                    <div class="linea-form">
+                        <label for="nombre-jugador">Nombre jugador/a</label>
+                        <input id="nombre-jugador" name="nombre-jugador" type="text" required>
+                    </div>
+                    <div class="linea-form">
+                        <div>
+                            <input type="radio" name="crear-unirse-radio" id="crear-unirse-radio_crear" value="crear_partida" checked>
+                            <label for="crear-unirse-radio_crear">Crear partida</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="crear-unirse-radio" id="crear-unirse-radio_unirse" value="unirse_a_partida">
+                            <label for="crear-unirse-radio_unirse">Unirse a partida</label>
+                        </div>
+                    </div>
+                    <button type="submit">Comenzar</button>
+                </form>
+            </div>
+        </div>
+        <!--<div id="formulario-reiniciar-juego" class="formulario-reiniciar-juego invisible">
+            <form method="post" onsubmit="return controlador.volverAJugar()">
+                <button type="submit">Volver a jugar</button>
+            </form>
+        </div>-->
+        
+        <div class="zona-tablero invisible">
+            <div class="aciertos-jugador">
+                <h2>Tus aciertos</h2>
+                <div class="aciertos">
+                    <div class="acierto-card" id="acierto-card-jugador-1"></div>
+                    <div class="acierto-card" id="acierto-card-jugador-2"></div>
+                    <div class="acierto-card" id="acierto-card-jugador-3"></div>
+                    <div class="acierto-card" id="acierto-card-jugador-4"></div>
+                    <div class="acierto-card" id="acierto-card-jugador-5"></div>
+                    <div class="acierto-card" id="acierto-card-jugador-6"></div>
+                </div>
+            </div>
+            <div id="tablero-cartas" class="tablero-cartas"></div>
+            <div class="aciertos-rival">
+                <div class="aciertos">
+                    <div class="acierto-card" id="acierto-card-rival-1"></div>
+                    <div class="acierto-card" id="acierto-card-rival-2"></div>
+                    <div class="acierto-card" id="acierto-card-rival-3"></div>
+                    <div class="acierto-card" id="acierto-card-rival-4"></div>
+                    <div class="acierto-card" id="acierto-card-rival-5"></div>
+                    <div class="acierto-card" id="acierto-card-rival-6"></div>
+                </div>
+                <h2>Aciertos <span id="nombre-jugador-rival">rival</span></h2>
+            </div>
+        </div>
+        <div class="esperando-jugador invisible">
+            Esperando al otro jugador. Id partida:
+            <span class="id-partida-esperando" id="id-partida-esperando"></span>
+        </div>
+        <div id="mensaje" class="mensaje mensaje__verde">
+            <span></span>
+            <!--<form onsubmit="return controlador.volverAJugar()" class="invisible">
+                <button type="submit">Volver a jugar</button>
+            </form>-->
+            <form onsubmit="return controlador.volverApantallaInicial()" class="invisible">
+                <button type="submit">Salir</button>
+            </form>
+        </div>
+
+        </main>
+
+    </body>
+</html>

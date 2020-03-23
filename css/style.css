@@ -1,0 +1,164 @@
+/* Selector universal, se aplica a todos los elementos */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* Esta propiedad no se hereda, por lo que queremos que para todos los elementos
+        se herede. Se heredará por tanto (en este caso) del elemento 'body', donde sí
+        hemos especificado un valor */
+    box-sizing: inherit;
+    /*font-family: "Montserrat", Arial, Helvetica, sans-serif;*/
+    font-family: 'Pacifico', cursive;
+    --color-primary: #673ab7;
+    --color-secondary: #f44336;
+    --color-tertiary: #def2f1;
+    --color-white: #ffefff;
+    --color-black: #17252a;
+}
+
+/* Aquí se definen los valores del 'root', es decir que los 'rem'
+    se aplicarán en base al valor del font-size del elemento 'html' */
+html {
+    /*font-size: 10px;*/
+    /* Queremos utilizar 10px 'por defecto' como font-size porque estamos utilizando
+    los 'rem' en toda la página. Pero a la vez no queremos sobreescribir el font-size
+    si el usuario lo cambia en las preferencias del navegador. Es por ello que dividimos
+    10/16 = 0.625, y ese es el porcentaje que utilizaremos del font-size definido por el usuario
+    como el font-size base para hacer los cálculos con los 'rem' */
+    font-size: 62.5%;
+}
+
+/* Todo lo que se incluye en el body se hereda por el resto de elementos (los elementos que se pueden heredar) */
+body {
+    /* El width y height de un elemento incluye tanto el tamaño del borde 
+    como del padding */
+    box-sizing: border-box;
+    /*background-image: url(../img/background.jpg);
+    background-size: cover;*/
+    /*background-image: linear-gradient(to left bottom,#24909c,#238792,#227e88,#21757f,#206c75);*/
+    background-color: var(--color-primary);
+}
+
+header{
+    height: 30vh;
+}
+
+h1{
+    margin: 0 auto;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--color-white);
+    padding-top: 1rem;
+    width: 90%;
+}
+
+.margin-top{
+    margin-top: 5rem;
+}
+
+.pareja-icono{
+    font-size: 5rem;
+}
+
+.titulo-border-top{
+    border-top: 2px dashed var(--color-white);
+}
+
+.titulo-border-bottom{
+    border-bottom: 2px dashed var(--color-white);
+    padding-bottom: 2rem;
+}
+
+main{
+    overflow-x: hidden;
+    height: 100%;
+}
+
+button{
+    color: var(--color-white);
+    font-size: 2rem;
+    border: none;
+    padding: 1rem 3rem;
+    transition: all .2s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: var(--color-secondary);
+    width: 15rem;
+}
+
+button:hover{
+    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(1,1,1, .2);
+    opacity: .9;
+}
+
+button:hover::after {
+    /* Lo hacemos más grande y lo hacemos invisible */
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.mensaje{
+    position: fixed;
+    width: 90%;
+    min-height: 10rem;
+    top: 100%;
+    left: 50%;
+    transform: translate( -50%, -100% );
+    border: 5px solid;
+    word-break: normal;
+    word-wrap: break-word;
+    padding: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    font-size: 2.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s linear;
+    text-align: center;
+}
+
+.visible{
+    visibility: visible;
+    opacity: .95;
+}
+
+.mensaje__verde{
+    background-color: #8bc34a;
+    border-color: #4caf50;
+}
+
+.mensaje__rojo{
+    background-color: #ff5722;
+    border-color: #f44336;
+}
+
+.mensaje button{
+    color: var(--color-black);
+    margin-top: 5px;
+}
+
+.mensaje.mensaje__verde button{
+    background-color: #4caf50;
+}
+
+.mensaje.mensaje__rojo button{
+    background-color: #f44336;
+}
+
+/* Escritorio */
+@media all and ( min-width: 768px ){
+    .pareja-icono{
+        font-size: 8rem;
+    }
+    .mensaje{
+        width: 50%;
+    }
+}
+
+/*Tablet*/
+@media all and ( min-width: 600px ) and ( max-width: 768px ){
+    .mensaje{
+        width: 30%;
+    }
+}
