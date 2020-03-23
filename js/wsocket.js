@@ -18,7 +18,15 @@ JuegoCartasSocket.prototype.conectarse = function(cb){
         this.tratarMensajeRecibido(e.data);
     };
     this.socket.onerror = (e) => {
-        this.vista.mostrarMensajeError( e.data, true );
+        if( e && e.data ){
+            this.vista.mostrarMensajeError( e.data, true );
+        } else if( e.type === "error" ){
+            this.vista.mostrarMensajeError( "Error de conexión con el servidor", false );
+        }
+    };
+    this.socket.onclose = (e) => {
+        console.log('onclose');
+        this.vista.ocultarBotonComenzarDuo();
     };
 };
 

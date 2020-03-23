@@ -272,3 +272,10 @@ Vista.prototype.toggleOcultarAciertosRival = function(){
         aciertosRivalEl.classList.toggle( 'no-visible' );
     }
 };
+
+Vista.prototype.ocultarBotonComenzarDuo = function(){
+    let formBtnDuo = document.querySelector( '.form-boton-duo' );
+    if( formBtnDuo ){
+        formBtnDuo.classList.add('invisible');
+    }
+};
