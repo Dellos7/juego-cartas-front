@@ -53,7 +53,7 @@ Controlador.prototype.reiniciarJuego = function(){
 Controlador.prototype.volverApantallaInicial = function(){
     /*this.vista.mostrarPantallaInicial();
     this.reiniciarJuego();*/
-    window.location.href = '/';
+    window.location.reload();
     return false;
 };
 
