@@ -162,13 +162,17 @@ Controlador.prototype.construirTableroDuo = function(mapaCartas, turno){
 
 Controlador.prototype.arrayCartasAleatorias = function(numeroCartas, numeroFotos){
     let arr = [];
-    let num = 0;
-    while( num < numeroCartas*2 ){
-        let rand = Math.floor( Math.random()*numeroFotos + 1 );
-        if( this.numVecesElEnArr(arr, rand) < 2 ){
-            arr.push(rand);
-            num++;
-        }
+    let i = 0, j = 0;
+    let nums = [];
+    while( i < numeroCartas ){
+        let rand;
+        do{
+            rand = Math.floor( Math.random()*numeroFotos + 1 );
+        } while( nums[rand] );
+        nums[rand] = true;
+        arr[j++] = rand;
+        arr[j++] = rand;
+        i++;
     }
     return arr;
 };

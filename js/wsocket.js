@@ -57,6 +57,7 @@ JuegoCartasSocket.prototype.tratarMensajeRecibido = function( mensaje ){
                     const cartas = datosMensaje[DatosMensaje.CARTAS];
                     const turno = datosMensaje[DatosMensaje.TURNO];
                     const mapaCartas = montarMapaCartas( cartas );
+                    console.log('MAPA CARTAS', mapaCartas);
                     this.controlador.construirTableroDuo( mapaCartas, turno );
                 }, 2000 );
                 break;
