@@ -34,8 +34,6 @@ body {
     /* El width y height de un elemento incluye tanto el tamaño del borde 
     como del padding */
     box-sizing: border-box;
-    /*background-image: url(../img/background.jpg);
-    background-size: cover;*/
     /*background-image: linear-gradient(to left bottom,#24909c,#238792,#227e88,#21757f,#206c75);*/
     background-color: var(--color-primary);
 }
