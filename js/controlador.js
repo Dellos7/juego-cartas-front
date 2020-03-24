@@ -17,27 +17,31 @@ var Controlador = function( vista, juegoCartasSocket, storage ){
 Controlador.prototype.constructor = Controlador;
 
 Controlador.prototype.iniciarJuego = function(tipoJuego){
-    this.tipoJuego = tipoJuego;
-    this.vista.mostrarOcultarZonaTablero();
     let numCartas = this.vista.obtenerNumeroCartas();
-    this.storage.guardarNumeroCartas( numCartas );
-    this.vista.modificarLayoutSegunNumeroCartas( numCartas );
-    if( tipoJuego === TipoJuego.SOLO ){
-        this.numCartas = Number.parseInt(numCartas);
-        this.vista.ocultarElementosPantallaPrincipal();
-        this.vista.toggleOcultarAciertosRival();
-        this.construirTableroSolo(numCartas, NUMERO_FOTOS);
-    } else if( tipoJuego === TipoJuego.DUO ){
-        this.vista.ocultarElementosPantallaPrincipal();
-        let res = this.vista.obtenerIdPartidaJugadorYTipo();
-        let { idPartida, nombreJugador, tipoUnion } = res;
-        this.storage.guardarDatosFormDuo( nombreJugador, idPartida, tipoUnion );
-        this.idPartida = idPartida;
-        if( tipoUnion === TipoUnion.CREAR ){
-            this.juegoCartasSocket.crearPartida( idPartida, nombreJugador, numCartas );
-        } else{
-            this.juegoCartasSocket.unirseAPartida( idPartida, nombreJugador );
+    if( numCartas%2 == 0 ){
+        this.tipoJuego = tipoJuego;
+        this.vista.mostrarOcultarZonaTablero();
+        this.storage.guardarNumeroCartas( numCartas );
+        this.vista.modificarLayoutSegunNumeroCartas( numCartas );
+        if( tipoJuego === TipoJuego.SOLO ){
+            this.numCartas = Number.parseInt(numCartas);
+            this.vista.ocultarElementosPantallaPrincipal();
+            this.vista.toggleOcultarAciertosRival();
+            this.construirTableroSolo(numCartas, NUMERO_FOTOS);
+        } else if( tipoJuego === TipoJuego.DUO ){
+            this.vista.ocultarElementosPantallaPrincipal();
+            let res = this.vista.obtenerIdPartidaJugadorYTipo();
+            let { idPartida, nombreJugador, tipoUnion } = res;
+            this.storage.guardarDatosFormDuo( nombreJugador, idPartida, tipoUnion );
+            this.idPartida = idPartida;
+            if( tipoUnion === TipoUnion.CREAR ){
+                this.juegoCartasSocket.crearPartida( idPartida, nombreJugador, numCartas );
+            } else{
+                this.juegoCartasSocket.unirseAPartida( idPartida, nombreJugador );
+            }
         }
+    } else{
+        this.vista.mostrarMensajeError( "El nº de cartas debe ser múltiplo de 2" );
     }
     return false;
 };
