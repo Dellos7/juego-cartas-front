@@ -17,3 +17,15 @@ Storage.prototype.obtenerDatosFormDuo = function(){
     }
     return json;
 };
+
+Storage.prototype.guardarNumeroCartas = function(numeroCartas){
+    localStorage.setItem('numeroCartas', numeroCartas);
+};
+
+Storage.prototype.obtenerNumeroCartas = function(){
+    let nStr = localStorage.getItem('numeroCartas');
+    if( nStr ){
+        return Number.parseInt( nStr );
+    }
+    return null;
+};

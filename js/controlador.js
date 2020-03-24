@@ -11,6 +11,7 @@ var Controlador = function( vista, juegoCartasSocket, storage ){
     this.tipoJuego = null;
     this.idPartida = null;
     this.nombreRival = '';
+    this.numCartas = NUMERO_CARTAS_BASE;
 };
 
 Controlador.prototype.constructor = Controlador;
@@ -18,10 +19,14 @@ Controlador.prototype.constructor = Controlador;
 Controlador.prototype.iniciarJuego = function(tipoJuego){
     this.tipoJuego = tipoJuego;
     this.vista.mostrarOcultarZonaTablero();
+    let numCartas = this.vista.obtenerNumeroCartas();
+    this.storage.guardarNumeroCartas( numCartas );
+    this.vista.modificarLayoutSegunNumeroCartas( numCartas );
     if( tipoJuego === TipoJuego.SOLO ){
+        this.numCartas = Number.parseInt(numCartas);
         this.vista.ocultarElementosPantallaPrincipal();
         this.vista.toggleOcultarAciertosRival();
-        this.construirTableroSolo(NUMERO_CARTAS, NUMERO_FOTOS);
+        this.construirTableroSolo(numCartas, NUMERO_FOTOS);
     } else if( tipoJuego === TipoJuego.DUO ){
         this.vista.ocultarElementosPantallaPrincipal();
         let res = this.vista.obtenerIdPartidaJugadorYTipo();
@@ -29,7 +34,7 @@ Controlador.prototype.iniciarJuego = function(tipoJuego){
         this.storage.guardarDatosFormDuo( nombreJugador, idPartida, tipoUnion );
         this.idPartida = idPartida;
         if( tipoUnion === TipoUnion.CREAR ){
-            this.juegoCartasSocket.crearPartida( idPartida, nombreJugador );
+            this.juegoCartasSocket.crearPartida( idPartida, nombreJugador, numCartas );
         } else{
             this.juegoCartasSocket.unirseAPartida( idPartida, nombreJugador );
         }
@@ -149,15 +154,16 @@ Controlador.prototype.construirTableroSolo = function(numeroCartas, numFotos){
         cartasIds.push(idCarta);
         this.mapaCartas[idCarta] = numCarta;
     }
-    this.vista.construirTablero( this.mapaCartas );
+    this.vista.construirTablero( this.mapaCartas, numeroCartas );
 };
 
-Controlador.prototype.construirTableroDuo = function(mapaCartas, turno){
+Controlador.prototype.construirTableroDuo = function(mapaCartas, turno, numCartas){
+    this.numCartas = Number.parseInt(numCartas);
     this.turno = turno == Turno.TURNO ? true : false;
     this.vista.mostrarMensaje( this.turno ? "Empiezas tú" : "NO empiezas tú", false );
     this.vista.toggleHabilitarClick( this.turno );
     this.mapaCartas = mapaCartas;
-    this.vista.construirTablero( this.mapaCartas );
+    this.vista.construirTablero( this.mapaCartas, this.numCartas );
 };
 
 Controlador.prototype.arrayCartasAleatorias = function(numeroCartas, numeroFotos){
@@ -205,7 +211,7 @@ Controlador.prototype.comprobarAcierto = function(){
 };
 
 Controlador.prototype.mostrarMensajeTurnoGanadorOPerdedor = function(){
-    if( this.cartasAcertadas.length === NUMERO_CARTAS ){
+    if( this.cartasAcertadas.length === this.numCartas ){
         if( this.cartasAcertadasJugador.length > this.cartasAcertadasRival.length ){
             this.vista.mostrarMensaje( "Fin de la partida. ¡Has ganado!", true );
         } else if( this.cartasAcertadasJugador.length == this.cartasAcertadasRival.length ){
@@ -222,7 +228,7 @@ Controlador.prototype.mostrarMensajeTurnoGanadorOPerdedor = function(){
 };
 
 Controlador.prototype.mostrarFinJuego = function(){
-    if( this.cartasAcertadas.length === NUMERO_CARTAS ){
+    if( this.cartasAcertadas.length === this.numCartas ){
         this.vista.mostrarMensaje( "Fin de la partida", true );
     }
 };

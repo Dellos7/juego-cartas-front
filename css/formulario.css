@@ -79,8 +79,16 @@
     visibility: hidden;
 }
 
+.numero-cartas{
+
+}
+
 @media all and ( min-width: 768px ){
     .formulario-iniciar-juego button{
         font-size: 2.3rem;
+    }
+    .numero-cartas{
+        max-width: 50%;
+        margin: 0 auto;
     }
 }

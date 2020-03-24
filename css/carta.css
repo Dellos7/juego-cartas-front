@@ -71,8 +71,8 @@
 }
 
 .carta__cara--foto{
-    background-color: red;
     background-size: cover;
+    background-position: center;
 }
 
 .reverso-rotado{
@@ -96,10 +96,11 @@
     justify-content: center;
 }
 .acierto-card{
-    margin: 0 .3rem;
+    margin: 2px .3rem;
     width: 6rem;
     height: 8.34rem;
     background-size: cover;
+    background-position: center;
     transition: all 2s linear;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
@@ -193,4 +194,12 @@
     100%{
         opacity: .2;
     }
+}
+
+.mas-de-6-cartas-tablero{
+    max-width: 100%;
+}
+
+.mas-de-6-cartas-aciertos{
+    flex-wrap: wrap;
 }

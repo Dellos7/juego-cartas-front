@@ -42,11 +42,25 @@ Vista.prototype.mostrarPantallaInicial = function(){
     }
 };
 
-Vista.prototype.construirTablero = function( mapaCartas ){
+Vista.prototype.construirTablero = function( mapaCartas, numeroCartas ){
     let tableroEl = document.querySelector('.tablero-cartas');
     for( let idCarta in mapaCartas ){
         let numCarta = mapaCartas[idCarta];
         this.anyadirCartaHtml( tableroEl, this.cartaHtml(idCarta, numCarta) );
+    }
+    this.construirAciertos( numeroCartas, 'jugador' );
+    this.construirAciertos( numeroCartas, 'rival' );
+};
+
+Vista.prototype.construirAciertos = function( numCartas, tipo ){
+    let aciertosContainerEl = document.querySelector(`.aciertos-${tipo} .aciertos`);
+    if( aciertosContainerEl ){
+        for(let i = 1; i <= numCartas; i++){
+            let nodo = document.createElement('div');
+            nodo.classList.add('acierto-card');
+            nodo.id = `acierto-card-${tipo}-${i}`;
+            aciertosContainerEl.appendChild(nodo);
+        }
     }
 };
 
@@ -266,6 +280,21 @@ Vista.prototype.rellenarFormularioDuo = function( json ){
     }
 };
 
+Vista.prototype.rellenarNumeroCartas = function( numeroCartas ){
+    let numeroCartasEl = document.querySelector('#numero-cartas');
+    if( numeroCartasEl ){
+        numeroCartasEl.value = numeroCartas;
+    }
+};
+
+Vista.prototype.obtenerNumeroCartas = function(){
+    let numeroCartasEl = document.querySelector('#numero-cartas');
+    if( numeroCartasEl ){
+        return numeroCartasEl.value;
+    }
+    return null;
+};
+
 Vista.prototype.toggleOcultarAciertosRival = function(){
     const aciertosRivalEl = document.querySelector( '.aciertos-rival' );
     if( aciertosRivalEl ){
@@ -279,3 +308,16 @@ Vista.prototype.ocultarBotonComenzarDuo = function(){
         formBtnDuo.classList.add('invisible');
     }
 };
+
+Vista.prototype.modificarLayoutSegunNumeroCartas = function( numCartas ){
+    if( numCartas > NUMERO_CARTAS_BASE ){
+        let aciertosEls = document.querySelectorAll('.aciertos');
+        for( let aciertoEl of aciertosEls ){
+            aciertoEl.classList.add('mas-de-6-cartas-aciertos');
+        }
+        let tableroEl = document.querySelector('.tablero-cartas');
+        if( tableroEl ){
+            tableroEl.classList.add('mas-de-6-cartas-tablero');
+        }
+    }
+}

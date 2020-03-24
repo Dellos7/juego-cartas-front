@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico|Ubuntu|Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/carta.css">
         <link rel="stylesheet" href="css/formulario.css">
@@ -21,6 +22,10 @@
         </header>
         <main>
         <div id="formulario-iniciar-juego" class="formulario-iniciar-juego">
+            <div class="linea-form numero-cartas">
+                <label for="numero-cartas">Número de cartas</label>
+                <input id="numero-cartas" name="numero-cartas" type="number" min="6" value="6" required>
+            </div>
             <div class="form-solo-duo-wrapper formulario-iniciar-juego__elem">
                 <form method="post" class="form-boton-solo" onsubmit="return controlador.iniciarJuego('solo')">
                     <button type="submit">Solo</button>
@@ -32,14 +37,6 @@
             <div class="form-partida-nombre-wrapper formulario-iniciar-juego__elem oculto-derecha">
                 <form method="post" class="form-partida-nombre" onsubmit="return controlador.iniciarJuego('duo')">
                     <div class="linea-form">
-                        <label for="id-partida">Id de la partida</label>
-                        <input id="id-partida" name="id-partida" type="text" required>
-                    </div>
-                    <div class="linea-form">
-                        <label for="nombre-jugador">Nombre jugador/a</label>
-                        <input id="nombre-jugador" name="nombre-jugador" type="text" required>
-                    </div>
-                    <div class="linea-form">
                         <div>
                             <input type="radio" name="crear-unirse-radio" id="crear-unirse-radio_crear" value="crear_partida" checked>
                             <label for="crear-unirse-radio_crear">Crear partida</label>
@@ -49,38 +46,27 @@
                             <label for="crear-unirse-radio_unirse">Unirse a partida</label>
                         </div>
                     </div>
+                    <div class="linea-form">
+                        <label for="id-partida">Id de la partida</label>
+                        <input id="id-partida" name="id-partida" type="text" required>
+                    </div>
+                    <div class="linea-form">
+                        <label for="nombre-jugador">Nombre jugador/a</label>
+                        <input id="nombre-jugador" name="nombre-jugador" type="text" required>
+                    </div>
                     <button type="submit">Comenzar</button>
                 </form>
             </div>
         </div>
-        <!--<div id="formulario-reiniciar-juego" class="formulario-reiniciar-juego invisible">
-            <form method="post" onsubmit="return controlador.volverAJugar()">
-                <button type="submit">Volver a jugar</button>
-            </form>
-        </div>-->
         
         <div class="zona-tablero invisible">
             <div class="aciertos-jugador">
                 <h2>Tus aciertos</h2>
-                <div class="aciertos">
-                    <div class="acierto-card" id="acierto-card-jugador-1"></div>
-                    <div class="acierto-card" id="acierto-card-jugador-2"></div>
-                    <div class="acierto-card" id="acierto-card-jugador-3"></div>
-                    <div class="acierto-card" id="acierto-card-jugador-4"></div>
-                    <div class="acierto-card" id="acierto-card-jugador-5"></div>
-                    <div class="acierto-card" id="acierto-card-jugador-6"></div>
-                </div>
+                <div class="aciertos"></div>
             </div>
             <div id="tablero-cartas" class="tablero-cartas"></div>
             <div class="aciertos-rival">
-                <div class="aciertos">
-                    <div class="acierto-card" id="acierto-card-rival-1"></div>
-                    <div class="acierto-card" id="acierto-card-rival-2"></div>
-                    <div class="acierto-card" id="acierto-card-rival-3"></div>
-                    <div class="acierto-card" id="acierto-card-rival-4"></div>
-                    <div class="acierto-card" id="acierto-card-rival-5"></div>
-                    <div class="acierto-card" id="acierto-card-rival-6"></div>
-                </div>
+                <div class="aciertos"></div>
                 <h2>Aciertos <span id="nombre-jugador-rival">rival</span></h2>
             </div>
         </div>

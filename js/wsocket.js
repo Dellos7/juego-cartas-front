@@ -12,7 +12,7 @@ JuegoCartasSocket.prototype.conectarse = function(cb){
         if( cb ){
             cb(e);
         }
-        this.enviarNumeroCartasYFotos( NUMERO_CARTAS, NUMERO_FOTOS );
+        this.enviarNumeroCartasYFotos( NUMERO_CARTAS_BASE, NUMERO_FOTOS );
     };
     this.socket.onmessage = (e) =>{
         this.tratarMensajeRecibido(e.data);
@@ -21,7 +21,7 @@ JuegoCartasSocket.prototype.conectarse = function(cb){
         if( e && e.data ){
             this.vista.mostrarMensajeError( e.data, true );
         } else if( e.type === "error" ){
-            this.vista.mostrarMensajeError( "Error de conexión con el servidor", false );
+            this.vista.mostrarMensajeError( "Error de conexión con el servidor", true );
         }
     };
     this.socket.onclose = (e) => {
@@ -30,8 +30,10 @@ JuegoCartasSocket.prototype.conectarse = function(cb){
     };
 };
 
-JuegoCartasSocket.prototype.crearPartida = function( idPartida, nombreJugador ){
-    this.socket.send( `${DatosMensaje.TIPO_MENSAJE}=${TipoMensajeCliente.CREAR_PARTIDA};${DatosMensaje.ID_PARTIDA}=${idPartida};${DatosMensaje.NOMBRE_JUGADOR}=${nombreJugador}` );
+JuegoCartasSocket.prototype.crearPartida = function( idPartida, nombreJugador, numCartas ){
+    this.socket.send(
+        `${DatosMensaje.TIPO_MENSAJE}=${TipoMensajeCliente.CREAR_PARTIDA};${DatosMensaje.ID_PARTIDA}=${idPartida};${DatosMensaje.NOMBRE_JUGADOR}=${nombreJugador};${DatosMensaje.NUMERO_CARTAS}=${numCartas}`
+        );
 };
 
 JuegoCartasSocket.prototype.unirseAPartida = function( idPartida, nombreJugador ){
@@ -64,9 +66,9 @@ JuegoCartasSocket.prototype.tratarMensajeRecibido = function( mensaje ){
                 setTimeout( () => {
                     const cartas = datosMensaje[DatosMensaje.CARTAS];
                     const turno = datosMensaje[DatosMensaje.TURNO];
+                    const numCartas = datosMensaje[DatosMensaje.NUMERO_CARTAS];
                     const mapaCartas = montarMapaCartas( cartas );
-                    console.log('MAPA CARTAS', mapaCartas);
-                    this.controlador.construirTableroDuo( mapaCartas, turno );
+                    this.controlador.construirTableroDuo( mapaCartas, turno, numCartas );
                 }, 2000 );
                 break;
             case TipoMensajeServidor.GIRA_CARTA:

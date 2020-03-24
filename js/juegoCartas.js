@@ -13,5 +13,10 @@ juegoCartasSocket.vista = vista;
 juegoCartasSocket.conectarse();
 
 window.addEventListener( 'load', () => {
+    let numCartas = storage.obtenerNumeroCartas();
+    if( numCartas ){
+        vista.rellenarNumeroCartas( numCartas );
+        controlador.numCartas = numCartas;
+    }
     vista.rellenarFormularioDuo( storage.obtenerDatosFormDuo() );
 });
