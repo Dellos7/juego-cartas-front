@@ -120,6 +120,34 @@
     animation: parpadearTexto 1.5s infinite;
 }
 
+.mas-de-6-cartas-tablero{
+    max-width: 100%;
+}
+
+.mas-de-6-cartas-aciertos{
+    flex-wrap: wrap;
+}
+
+@media (max-width: 370px){
+    .tablero-cartas{
+        width: 100%;
+        max-width: 100%;
+        margin: 2px;
+    }
+    .carta{
+        margin: .3rem;
+        width: 7rem;
+        height: 9.73rem;
+    }
+}
+
+@media (max-width: 310px){
+    .carta{
+        width: 6rem;
+        height: 8.34rem;
+    }
+}
+
 /*Escritorio*/
 @media all and ( min-width: 768px ){
     .zona-tablero{
@@ -194,12 +222,4 @@
     100%{
         opacity: .2;
     }
-}
-
-.mas-de-6-cartas-tablero{
-    max-width: 100%;
-}
-
-.mas-de-6-cartas-aciertos{
-    flex-wrap: wrap;
 }

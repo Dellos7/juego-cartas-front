@@ -321,3 +321,10 @@ Vista.prototype.modificarLayoutSegunNumeroCartas = function( numCartas ){
         }
     }
 }
+
+Vista.prototype.cerrarMensaje = function(){
+    let cerrarMensajeEl = document.querySelector('.mensaje');
+    if( cerrarMensajeEl ){
+        cerrarMensajeEl.classList.toggle('invisible');
+    }
+};

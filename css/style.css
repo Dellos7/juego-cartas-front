@@ -146,6 +146,29 @@ button:hover::after {
     background-color: #f44336;
 }
 
+.cerrar-mensaje{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-left: 5px solid;
+    border-bottom: 5px solid;
+    padding: 2px;
+}
+
+.cerrar-mensaje:hover{
+    cursor: pointer;
+}
+
+.mensaje__rojo .cerrar-mensaje{
+    border-color: #f44336;
+}
+
+.mensaje__verde .cerrar-mensaje{
+    border-color: #4caf50;
+}
+
 /* Escritorio */
 @media all and ( min-width: 768px ){
     .pareja-icono{
