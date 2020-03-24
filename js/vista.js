@@ -192,6 +192,7 @@ Vista.prototype.mostrarMensaje = function(mensaje, mostrarBotonVolver){
         formBtnVolver = document.querySelector('#mensaje form');
     }
     if( mensajeEl ){
+        mensajeEl.classList.remove('invisible');
         mensajeEl.classList.remove('visible', 'mensaje__rojo');
         mensajeEl.classList.add('visible', 'mensaje__verde');
         //mensajeEl.innerHTML = mensaje;
@@ -217,6 +218,7 @@ Vista.prototype.mostrarMensajeError = function(mensaje, mostrarBotonVolver){
         formBtnVolver = document.querySelector('#mensaje form');
     }
     if( mensajeEl ){
+        mensajeEl.classList.remove('invisible');
         mensajeEl.classList.remove('visible', 'mensaje__verde');
         mensajeEl.classList.add('visible', 'mensaje__rojo');
         //mensajeEl.innerHTML = mensaje;
