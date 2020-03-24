@@ -70,11 +70,11 @@ Controlador.prototype.volverAJugar = function(){
 };
 
 Controlador.prototype.rotarCarta = function(idCarta, esJugador){
+    let rotada = this.vista.rotarCarta(idCarta);
     // Si estamos jugando en duo, avisamos al otro jugador que hemos girado
     if( esJugador && this.tipoJuego == TipoJuego.DUO ){
         this.juegoCartasSocket.girarCarta( idCarta, this.idPartida );
     }
-    let rotada = this.vista.rotarCarta(idCarta);
     if( !rotada ){
         this.cartasClicadas.push(idCarta);
         if( this.cartasClicadas.length >= 2 ){ // Ya se ha hecho click en 2 cartas

@@ -1,6 +1,6 @@
 /* Constantes */
 const NUMERO_CARTAS_BASE = 6;
-const NUMERO_FOTOS = 50;
+const NUMERO_FOTOS = 72;
 const TIMEOUT_ACIERTO_FALLO = 2000;
 const TIMEOUT_MENSAJE = 3000;
 const TipoJuego = {
