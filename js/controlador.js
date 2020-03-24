@@ -22,7 +22,6 @@ Controlador.prototype.iniciarJuego = function(tipoJuego){
         this.tipoJuego = tipoJuego;
         this.vista.mostrarOcultarZonaTablero();
         this.storage.guardarNumeroCartas( numCartas );
-        this.vista.modificarLayoutSegunNumeroCartas( numCartas );
         if( tipoJuego === TipoJuego.SOLO ){
             this.numCartas = Number.parseInt(numCartas);
             this.vista.ocultarElementosPantallaPrincipal();
@@ -151,6 +150,7 @@ Controlador.prototype.anyadirCartaAcertadaRival = function(idCarta){
 };
 
 Controlador.prototype.construirTableroSolo = function(numeroCartas, numFotos){
+    this.vista.modificarLayoutSegunNumeroCartas( numeroCartas );
     let cartasIds = [];
     let arrCartas = this.arrayCartasAleatorias(numeroCartas, numFotos);
     for( let numCarta of arrCartas ){
@@ -162,6 +162,7 @@ Controlador.prototype.construirTableroSolo = function(numeroCartas, numFotos){
 };
 
 Controlador.prototype.construirTableroDuo = function(mapaCartas, turno, numCartas){
+    this.vista.modificarLayoutSegunNumeroCartas( numCartas );
     this.numCartas = Number.parseInt(numCartas);
     this.turno = turno == Turno.TURNO ? true : false;
     this.vista.mostrarMensaje( this.turno ? "Empiezas tú" : "NO empiezas tú", false );
